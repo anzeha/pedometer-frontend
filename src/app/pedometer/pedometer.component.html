@@ -1,2 +1,36 @@
 <p>Number of steps:</p>
-{{ stepsCount }}
+<div class="container">
+  <div class="input_item">
+    <form #ipForm="ngForm" (ngSubmit)="onIP_submit()">
+      <div class="form-group">
+        <label for="esp_ip">IP address</label>
+        <input
+          [(ngModel)]="esp_ip"
+          name="esp_ip"
+          type="text"
+          class="form-control"
+          id="esp_ip"
+          aria-describedby="emailHelp"
+          placeholder="Insert IP of ESP8266 board with port"
+        />
+        <small id="emailHelp" class="form-text text-muted"
+          >Do not include port number, as it is set to 81 by default</small
+        >
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Connect</button>
+      </div>
+    </form>
+  </div>
+  <div class="plot" *ngIf="accTrace$ | async as trace">
+    <canvas
+      baseChart
+      width="400"
+      height="400"
+      [data]="trace"
+      [type]="'line'"
+      [options]="options"
+    >
+    </canvas>
+  </div>
+</div>

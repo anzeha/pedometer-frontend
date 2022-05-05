@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.plot {
+  justify-content: center;
+  display: flex;
+  flex: auto;
+  padding-left: 30%;
+  padding-right: 30%;
+  margin-top: 10%;
+}
+
+.input_item {
+  justify-content: center;
+  display: flex;
+  flex: auto;
+}
