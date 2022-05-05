@@ -99,6 +99,10 @@ export class PedometerComponent {
           unit: 'second',
         },
       },
+      y: {
+        min: -1.7,
+        max: 1.8,
+      },
     },
   };
 }
