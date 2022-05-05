@@ -7,13 +7,27 @@
   justify-content: center;
   display: flex;
   flex: auto;
-  padding-left: 30%;
-  padding-right: 30%;
-  margin-top: 10%;
+  padding-left: 15%;
+  padding-right: 15%;
+  margin-top: 10px;
 }
 
 .input_item {
   justify-content: center;
   display: flex;
   flex: auto;
+}
+
+.spinner {
+  justify-content: center;
+  display: flex;
+  flex: auto;
+  align-items: center;
+}
+
+.alert_message {
+  justify-content: center;
+  display: flex;
+  flex: auto;
+  margin-top: 10px;
 }

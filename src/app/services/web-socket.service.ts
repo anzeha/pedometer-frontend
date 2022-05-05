@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, Observable, Observer } from 'rxjs';
+import { catchError, map, Observable, Observer } from 'rxjs';
 import { AnonymousSubject, Subject } from 'rxjs/internal/Subject';
 import { webSocket } from 'rxjs/webSocket';
 
@@ -25,8 +25,10 @@ export class WebSocketService {
     timestamps: Date[];
   }>;
 
-  constructor() {
-    this.messages = <
+  constructor() {}
+
+  public createConnection(url: string) {
+    return (this.messages = <
       Subject<{
         x: number[];
         y: number[];
@@ -34,7 +36,7 @@ export class WebSocketService {
         treshold: number[];
         timestamps: Date[];
       }>
-    >this.connect(CHAT_URL).pipe(
+    >this.connect(url).pipe(
       map(
         (
           response: MessageEvent
@@ -69,8 +71,11 @@ export class WebSocketService {
             treshold: this._treshold,
           };
         }
-      )
-    );
+      ),
+      catchError((err) => {
+        return err;
+      })
+    ));
   }
 
   public connect(url: string): AnonymousSubject<MessageEvent> {
