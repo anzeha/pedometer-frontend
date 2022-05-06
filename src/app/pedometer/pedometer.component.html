@@ -30,6 +30,10 @@
   <div class="alert_message" *ngIf="connected">
     <div class="alert alert-success" role="alert">Successfully connected!</div>
   </div>
+  <div class="steps_container">
+    <p class="fs-1">Number of steps:</p>
+    <p class="fs-1" style="margin-left: 10px">{{ stepsCount }}</p>
+  </div>
   <div class="plot" *ngIf="accTrace$ | async as trace">
     <canvas
       baseChart

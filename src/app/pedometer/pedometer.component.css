@@ -31,3 +31,9 @@
   flex: auto;
   margin-top: 10px;
 }
+
+.steps_container {
+  justify-content: center;
+  display: flex;
+  flex: auto;
+}

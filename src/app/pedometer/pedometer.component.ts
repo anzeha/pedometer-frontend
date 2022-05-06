@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { WebSocketService } from 'src/app/services/web-socket.service';
 import { ChartOptions } from 'chart.js';
 import 'chartjs-adapter-moment';
@@ -15,7 +15,7 @@ export class PedometerComponent {
   connected: boolean = false;
   loading: boolean = false;
   accTrace$: Observable<any> = of(null);
-
+  stepsCounter: number = 0;
   constructor(private _webSocketService: WebSocketService) {}
 
   onIP_submit() {
@@ -54,6 +54,10 @@ export class PedometerComponent {
         return err;
       })
     );
+    this._webSocketService.step.subscribe((data) => {
+      console.log(data);
+      this.stepsCount++;
+    });
   }
 
   ngOnInit(): void {
@@ -93,8 +97,8 @@ export class PedometerComponent {
         },
       },
       y: {
-        min: -1.7,
-        max: 1.8,
+        min: -1.5,
+        max: 1.5,
       },
     },
   };

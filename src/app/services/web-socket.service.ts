@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, Observer } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  map,
+  Observable,
+  Observer,
+  of,
+} from 'rxjs';
 import { AnonymousSubject, Subject } from 'rxjs/internal/Subject';
 import { webSocket } from 'rxjs/webSocket';
 
@@ -23,7 +30,11 @@ export class WebSocketService {
     timestamps: Date[];
   }>;
 
-  constructor() {}
+  public step: Subject<number>;
+
+  constructor() {
+    this.step = new Subject<number>();
+  }
 
   public createConnection(url: string) {
     return (this.messages = <
@@ -55,7 +66,7 @@ export class WebSocketService {
             this._z.push(data.accs.z);
             this._treshold.push(data.treshold);
           } else {
-            console.log(data);
+            this.step.next(data.steps);
           }
 
           if (this._y.length > 20) {
