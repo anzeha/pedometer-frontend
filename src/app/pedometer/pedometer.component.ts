@@ -43,6 +43,7 @@ export class PedometerComponent {
             {
               data: data.treshold,
               label: 'Treshold',
+              borderColor: 'green',
             },
           ],
           labels: data.timestamps,
