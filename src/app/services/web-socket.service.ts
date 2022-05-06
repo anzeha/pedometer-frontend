@@ -3,8 +3,6 @@ import { catchError, map, Observable, Observer } from 'rxjs';
 import { AnonymousSubject, Subject } from 'rxjs/internal/Subject';
 import { webSocket } from 'rxjs/webSocket';
 
-const CHAT_URL = 'ws://10.10.0.41:81';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -50,11 +48,15 @@ export class WebSocketService {
           let data = JSON.parse(response.data);
           // We will show the 20 most recent values
 
-          this._timestamps.push(new Date());
-          this._x.push(data.accs.x);
-          this._y.push(data.accs.y);
-          this._z.push(data.accs.z);
-          this._treshold.push(data.treshold);
+          if (data.event_id == 1) {
+            this._timestamps.push(new Date());
+            this._x.push(data.accs.x);
+            this._y.push(data.accs.y);
+            this._z.push(data.accs.z);
+            this._treshold.push(data.treshold);
+          } else {
+            console.log(data);
+          }
 
           if (this._y.length > 20) {
             this._x = this._x.slice(1, -1);

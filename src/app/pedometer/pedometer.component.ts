@@ -1,14 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { catchError, map, Observable, of, Subscription } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { Component } from '@angular/core';
+import { catchError, map, Observable, of } from 'rxjs';
 import { WebSocketService } from 'src/app/services/web-socket.service';
-import {
-  ChartOptions,
-  ChartType,
-  ChartData,
-  ChartDataset,
-  ChartConfiguration,
-} from 'chart.js';
+import { ChartOptions } from 'chart.js';
 import 'chartjs-adapter-moment';
 
 @Component({
