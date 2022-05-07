@@ -8,7 +8,6 @@ import {
   of,
 } from 'rxjs';
 import { AnonymousSubject, Subject } from 'rxjs/internal/Subject';
-import { webSocket } from 'rxjs/webSocket';
 
 @Injectable({
   providedIn: 'root',

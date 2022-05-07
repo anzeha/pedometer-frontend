@@ -14,6 +14,7 @@ export class PedometerComponent {
   esp_ip: string = '';
   connected: boolean = false;
   loading: boolean = false;
+  errorConnecting: boolean = false;
   accTrace$: Observable<any> = of(null);
   stepsCounter: number = 0;
   constructor(private _webSocketService: WebSocketService) {}
@@ -26,6 +27,7 @@ export class PedometerComponent {
       map((data) => {
         this.loading = false;
         this.connected = true;
+        this.errorConnecting = false;
         return {
           datasets: [
             {
@@ -51,12 +53,12 @@ export class PedometerComponent {
       }),
       catchError((err) => {
         console.log('Error connecting to ESP8266');
-        console.log(err);
-        return err;
+        this.loading = false;
+        this.errorConnecting = true;
+        return of(err);
       })
     );
     this._webSocketService.step.subscribe((data) => {
-      console.log(data);
       this.stepsCount++;
     });
   }

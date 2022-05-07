@@ -30,19 +30,25 @@
   <div class="alert_message" *ngIf="connected">
     <div class="alert alert-success" role="alert">Successfully connected!</div>
   </div>
-  <div class="steps_container">
+  <div class="alert_message" *ngIf="errorConnecting">
+    <div class="alert alert-danger" role="alert">Connection unsuccessful!</div>
+  </div>
+
+  <div class="steps_container" *ngIf="!errorConnecting && connected">
     <p class="fs-1">Number of steps:</p>
     <p class="fs-1" style="margin-left: 10px">{{ stepsCount }}</p>
   </div>
-  <div class="plot" *ngIf="accTrace$ | async as trace">
-    <canvas
-      baseChart
-      width="600"
-      height="400"
-      [data]="trace"
-      [type]="'line'"
-      [options]="options"
-    >
-    </canvas>
+  <div *ngIf="!errorConnecting">
+    <div class="plot" *ngIf="accTrace$ | async as trace">
+      <canvas
+        baseChart
+        width="600"
+        height="400"
+        [data]="trace"
+        [type]="'line'"
+        [options]="options"
+      >
+      </canvas>
+    </div>
   </div>
 </div>
