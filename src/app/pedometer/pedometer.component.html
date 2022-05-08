@@ -37,6 +37,13 @@
     <p class="fs-1">Number of steps:</p>
     <p class="fs-1" style="margin-left: 10px">{{ stepsCount }}</p>
   </div>
+  <div
+    class="steps_container"
+    *ngIf="!errorConnecting && connected && mainAxis"
+  >
+    <p class="fs-2">Biggest difference axis:</p>
+    <p class="fs-2" style="margin-left: 10px">{{ mainAxis }}</p>
+  </div>
   <div *ngIf="!errorConnecting">
     <div class="plot" *ngIf="accTrace$ | async as trace">
       <canvas

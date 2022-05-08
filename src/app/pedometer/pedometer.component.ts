@@ -11,10 +11,11 @@ import 'chartjs-adapter-moment';
 })
 export class PedometerComponent {
   public stepsCount: number = 0;
-  esp_ip: string = '';
+  esp_ip: string = 'espWebSock.local';
   connected: boolean = false;
   loading: boolean = false;
   errorConnecting: boolean = false;
+  mainAxis: string = '';
   accTrace$: Observable<any> = of(null);
   stepsCounter: number = 0;
   constructor(private _webSocketService: WebSocketService) {}
@@ -28,6 +29,9 @@ export class PedometerComponent {
         this.loading = false;
         this.connected = true;
         this.errorConnecting = false;
+        if (data.mainAxis == 0) this.mainAxis = 'X';
+        if (data.mainAxis == 2) this.mainAxis = 'Y';
+        if (data.mainAxis == 4) this.mainAxis = 'Z';
         return {
           datasets: [
             {
@@ -53,6 +57,7 @@ export class PedometerComponent {
       }),
       catchError((err) => {
         console.log('Error connecting to ESP8266');
+        //console.log(err);
         this.loading = false;
         this.errorConnecting = true;
         return of(err);

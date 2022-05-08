@@ -27,6 +27,7 @@ export class WebSocketService {
     z: number[];
     treshold: number[];
     timestamps: Date[];
+    mainAxis: number;
   }>;
 
   public step: Subject<number>;
@@ -43,6 +44,7 @@ export class WebSocketService {
         z: number[];
         treshold: number[];
         timestamps: Date[];
+        mainAxis: number;
       }>
     >this.connect(url).pipe(
       map(
@@ -54,6 +56,7 @@ export class WebSocketService {
           z: number[];
           treshold: number[];
           timestamps: Date[];
+          mainAxis: number;
         } => {
           let data = JSON.parse(response.data);
           // We will show the 20 most recent values
@@ -81,6 +84,7 @@ export class WebSocketService {
             z: this._z,
             timestamps: this._timestamps,
             treshold: this._treshold,
+            mainAxis: data.main_axis,
           };
         }
       ),
